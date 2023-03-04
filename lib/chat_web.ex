@@ -40,7 +40,6 @@ defmodule ChatWeb do
 
       # Include shared imports and aliases for views
       unquote(view_helpers())
-      import Phoenix.LiveView, only: [live_render: 2, live_render: 3, live_link: 1, live_link: 2]
     end
   end
 
@@ -92,6 +91,7 @@ defmodule ChatWeb do
       use Phoenix.HTML
 
       # Import LiveView and .heex helpers (live_render, live_patch, <.form>, etc)
+      # import Phoenix.LiveView, only: [live_render: 1, live_render: 3, live_link: 1, live_link: 2]
       import Phoenix.LiveView.Helpers
 
       # Import basic rendering functionality (render, render_layout, etc)

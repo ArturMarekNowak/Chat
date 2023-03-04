@@ -1,3 +1,8 @@
+alias Chat.Messenger.Conversation
+alias Chat.Messenger.SeenMessages
+alias Chat.Messenger.MessageReaction
+alias Chat.Auth.User
+
 defmodule Chat.Messenger.Message do
   use Ecto.Schema
   import Ecto.Changeset

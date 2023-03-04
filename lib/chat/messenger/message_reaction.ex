@@ -1,3 +1,7 @@
+alias Chat.Auth.User
+alias Chat.Messenger.Emoji
+alias Chat.Messenger.Message
+
 defmodule Chat.Messenger.MessageReaction do
   use Ecto.Schema
   import Ecto.Changeset

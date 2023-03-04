@@ -7,7 +7,7 @@ defmodule Chat.Repo.Migrations.CreateAuthUsers do
 
       timestamps()
 
-      create(unique_index(:auth_users, [:nickname]))
+      unique_index(:auth_users, [:nickname])
     end
   end
 end
