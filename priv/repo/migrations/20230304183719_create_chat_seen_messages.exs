@@ -1,4 +1,4 @@
-defmodule Chat.Repo.Migrations.CreateChatSeenMessages do
+defmodule Chat.Repo.Migrations.CreateChatSeenMessage do
   use Ecto.Migration
 
   def change do

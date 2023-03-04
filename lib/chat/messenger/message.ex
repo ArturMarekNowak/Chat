@@ -1,5 +1,5 @@
 alias Chat.Messenger.Conversation
-alias Chat.Messenger.SeenMessages
+alias Chat.Messenger.SeenMessage
 alias Chat.Messenger.MessageReaction
 alias Chat.Auth.User
 
@@ -13,7 +13,7 @@ defmodule Chat.Messenger.Message do
     belongs_to(:conversation, Conversation)
     belongs_to(:user, User)
 
-    has_many(:seen_messages, SeenMessages)
+    has_many(:seen_messages, SeenMessage)
     has_many(:message_reactions, MessageReaction)
 
     timestamps()
