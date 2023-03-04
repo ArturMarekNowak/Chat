@@ -24,6 +24,7 @@ defmodule ChatWeb do
       import Plug.Conn
       import ChatWeb.Gettext
       alias ChatWeb.Router.Helpers, as: Routes
+      import Phoenix.LiveView.Controller
     end
   end
 
@@ -39,6 +40,7 @@ defmodule ChatWeb do
 
       # Include shared imports and aliases for views
       unquote(view_helpers())
+      import Phoenix.LiveView, only: [live_render: 2, live_render: 3, live_link: 1, live_link: 2]
     end
   end
 
