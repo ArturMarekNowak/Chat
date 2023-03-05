@@ -13,7 +13,7 @@ defmodule Chat.Application do
       # Start the Telemetry supervisor
       ChatWeb.Telemetry,
       # Start the PubSub system
-      {Phoenix.PubSub, name: Chat.PubSub},
+      {Phoenix.PubSub, name: Chat.PubSub, adapter: Phoenix.PubSub.PG2},
       # Start the Endpoint (http/https)
       ChatWeb.Endpoint
       # Start a worker by calling: Chat.Worker.start_link(arg)
