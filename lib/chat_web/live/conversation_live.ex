@@ -2,6 +2,7 @@ defmodule ChatWeb.ConversationLive do
   use Phoenix.LiveView
   use Phoenix.HTML
 
+  alias Logger
   alias Chat.{Auth, Messenger, Repo}
 
   def render(assigns) do
@@ -46,16 +47,25 @@ defmodule ChatWeb.ConversationLive do
          }) do
       {:ok, new_message} ->
         new_message = %{new_message | user: user}
+
+        ChatWeb.Endpoint.broadcast!(
+          "conversation_#{conversation_id}",
+          "new_message",
+          new_message
+        )
+
         updated_messages = socket.assigns[:messages] ++ [new_message]
 
-        {:noreply, socket |> assign(:messages, updated_messages)}
-
-      {:error, _} ->
-        {:noreply, socket}
+      {:error, err} ->
+        {Logger.error(inspect(err))}
     end
+
+    {:noreply, socket}
   end
 
   def handle_params(%{"conversation_id" => conversation_id, "user_id" => user_id}, _uri, socket) do
+    ChatWeb.Endpoint.subscribe("conversation_#{conversation_id}")
+
     {:noreply,
      socket
      |> assign(:user_id, user_id)
@@ -75,5 +85,11 @@ defmodule ChatWeb.ConversationLive do
     |> assign(:user, user)
     |> assign(:conversation, conversation)
     |> assign(:messages, conversation.messages)
+  end
+
+  def handle_info(%{event: "new_message", payload: new_message}, socket) do
+    updated_messages = socket.assigns[:messages] ++ [new_message]
+
+    {:noreply, socket |> assign(:messages, updated_messages)}
   end
 end
