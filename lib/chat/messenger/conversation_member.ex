@@ -10,8 +10,6 @@ defmodule Chat.Messenger.ConversationMember do
 
     belongs_to(:user, User)
     belongs_to(:conversation, Conversation)
-
-    timestamps()
   end
 
   @doc false

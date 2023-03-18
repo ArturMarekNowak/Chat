@@ -3,12 +3,15 @@ defmodule Chat.Auth.User do
   import Ecto.Changeset
   use Pow.Ecto.Schema
 
-  schema "auth_users" do
-    field(:nickname, :string)
-    field(:email, :string)
-    field(:password_hash, :string)
+  alias Chat.Chat.{ConversationMember}
 
-    timestamps()
+  schema "auth_users" do
+    pow_user_fields()
+
+    field(:nickname, :string)
+
+    has_many :conversation_members, ConversationMember
+    has_many :conversations, through: [:conversation_members, :conversation]
   end
 
   @doc false

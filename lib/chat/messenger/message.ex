@@ -15,8 +15,6 @@ defmodule Chat.Messenger.Message do
 
     has_many(:seen_messages, SeenMessage)
     has_many(:message_reactions, MessageReaction)
-
-    timestamps()
   end
 
   @doc false

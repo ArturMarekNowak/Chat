@@ -5,8 +5,6 @@ defmodule Chat.Messenger.SeenMessage do
   schema "chat_seen_messages" do
     belongs_to(:user, User)
     belongs_to(:message, Message)
-
-    timestamps()
   end
 
   @doc false

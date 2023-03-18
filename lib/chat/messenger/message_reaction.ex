@@ -10,8 +10,6 @@ defmodule Chat.Messenger.MessageReaction do
     belongs_to(:user, User)
     belongs_to(:emoji, Emoji)
     belongs_to(:message, Message)
-
-    timestamps()
   end
 
   @doc false
