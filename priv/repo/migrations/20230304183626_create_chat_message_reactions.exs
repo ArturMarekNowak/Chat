@@ -6,8 +6,6 @@ defmodule Chat.Repo.Migrations.CreateChatMessageReactions do
       add(:message_id, references(:chat_messages, on_delete: :nothing), null: false)
       add(:user_id, references(:auth_users, on_delete: :nothing), null: false)
       add(:emoji_id, references(:chat_emojis, on_delete: :nothing), null: false)
-
-      timestamps()
     end
 
     create(index(:chat_message_reactions, [:message_id]))

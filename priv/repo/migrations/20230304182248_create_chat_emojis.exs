@@ -5,8 +5,6 @@ defmodule Chat.Repo.Migrations.CreateChatEmojis do
     create table(:chat_emojis) do
       add(:key, :string, null: false)
       add(:unicode, :string, null: false)
-
-      timestamps()
     end
   end
 end
