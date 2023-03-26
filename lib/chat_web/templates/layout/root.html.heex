@@ -23,6 +23,9 @@
         <img src={Routes.static_path(@conn, "/images/letters.png")} width="378.07" height="132" alt="Logo"/>
       </section>
     </header>
-    <%= @inner_content %>
+    <main role="main" class="container">
+      <%= @inner_content %>
+    </main>
+    <script type="text/javascript" src={Routes.static_path(@conn, "/js/app.js")}></script>
   </body>
 </html>

@@ -1,8 +1,4 @@
 const CreateConversationFormHooks = {
-  disconnected() {
-    console.log("Disconnected", this)
-  },
-
   reconnected() {
     console.log("Reconnected", this)
     let formData = new FormData(this.el)
