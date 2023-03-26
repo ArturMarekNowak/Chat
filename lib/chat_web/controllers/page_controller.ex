@@ -1,7 +1,9 @@
 defmodule ChatWeb.PageController do
   use ChatWeb, :controller
 
-  def index(conn, _params) do
+  plug ChatWeb.AssignUser, preload: :conversations
+
+  def index(conn, opts \\ []) do
     render(conn, "index.html")
   end
 end

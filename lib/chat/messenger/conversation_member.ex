@@ -1,5 +1,5 @@
 alias Chat.Auth.User
-alias Chat.Messnger.Conversation
+alias Chat.Messenger.Conversation
 
 defmodule Chat.Messenger.ConversationMember do
   use Ecto.Schema
@@ -10,6 +10,8 @@ defmodule Chat.Messenger.ConversationMember do
 
     belongs_to(:user, User)
     belongs_to(:conversation, Conversation)
+
+    timestamps()
   end
 
   @doc false

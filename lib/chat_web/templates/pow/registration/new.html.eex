@@ -15,13 +15,13 @@
   <%= text_input f, :nickname %>
   <%= error_tag f, :nickname %>
 
-  <%= label f, :current_password %>
-  <%= password_input f, :current_password %>
-  <%= error_tag f, :current_password %>
+  <%= label f, :password %>
+  <%= password_input f, :password %>
+  <%= error_tag f, :password %>
 
-  <%= label f, :password_confirmation %>
-  <%= password_input f, :password_confirmation %>
-  <%= error_tag f, :password_confirmation %>
+  <%= label f, :confirm_password %>
+  <%= password_input f, :confirm_password %>
+  <%= error_tag f, :confirm_password %>
 
   <div>
     <%= submit "Register" %>
@@ -29,4 +29,4 @@
 <% end %>
 
 
-<span><%= link "Sign in", to: Routes.pow_session_path(@conn, :new) %>%></span>
+<span><%= link "Sign in", to: Routes.pow_session_path(@conn, :new) %></span>

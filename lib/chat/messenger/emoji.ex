@@ -5,6 +5,8 @@ defmodule Chat.Messenger.Emoji do
   schema "chat_emojis" do
     field(:key, :string)
     field(:unicode, :string)
+
+    timestamps()
   end
 
   @doc false

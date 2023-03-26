@@ -11,6 +11,8 @@ defmodule Chat.Messenger.Conversation do
     has_many(:conversation_members, ConversationMember)
     has_many(:users, through: [:conversation_members, :user])
     has_many(:messages, Message)
+
+    timestamps()
   end
 
   @doc false

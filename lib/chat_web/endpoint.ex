@@ -10,7 +10,14 @@ defmodule ChatWeb.Endpoint do
     signing_salt: "O7xLh8k+"
   ]
 
-  socket("/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]])
+  socket("/live", Phoenix.LiveView.Socket,
+    websocket: [connect_info: [session: @session_options]],
+    longpoll: false
+  )
+
+  socket "/socket", ChatWeb.UserSocket,
+    websocket: true,
+    longpoll: false
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -49,6 +56,6 @@ defmodule ChatWeb.Endpoint do
   plug(Plug.MethodOverride)
   plug(Plug.Head)
   plug(Plug.Session, @session_options)
-  plug(Pow.Plug.Session, otp_app: :chat, cache_store_backend: Pow.Store.Backend.MesiaCache)
+  plug(Pow.Plug.Session, otp_app: :chat, cache_store_backend: Pow.Store.Backend.MnesiaCache)
   plug(ChatWeb.Router)
 end

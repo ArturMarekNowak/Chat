@@ -6,6 +6,8 @@ defmodule Chat.Repo.Migrations.CreateChatConversationMembers do
       add(:owner, :boolean, default: false, null: false)
       add(:conversation_id, references(:chat_conversations, on_delete: :nothing), null: false)
       add(:user_id, references(:auth_users, on_delete: :nothing), null: false)
+
+      timestamps()
     end
 
     create(index(:chat_conversation_members, [:conversation_id]))
