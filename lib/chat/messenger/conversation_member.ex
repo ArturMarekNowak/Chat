@@ -1,5 +1,5 @@
 alias Chat.Auth.User
-alias Chat.Messnger.Conversation
+alias Chat.Messenger.Conversation
 
 defmodule Chat.Messenger.ConversationMember do
   use Ecto.Schema
@@ -18,7 +18,7 @@ defmodule Chat.Messenger.ConversationMember do
   def changeset(conversation_member, attrs) do
     conversation_member
     |> cast(attrs, [:owner, :conversation_id, :user_id])
-    |> validate_required([:owner, :conversation_id, :user_id])
+    # |> validate_required([:owner, :conversation_id, :user_id])
     |> unique_constraint(:user, name: :chat_conversation_members_conversation_id_user_id_index)
     |> unique_constraint(:conversation_id, name: :chat_conversation_members_owner)
   end

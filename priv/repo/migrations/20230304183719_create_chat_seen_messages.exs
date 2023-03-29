@@ -9,6 +9,9 @@ defmodule Chat.Repo.Migrations.CreateChatSeenMessage do
       timestamps()
     end
 
+    create index(:chat_seen_messages, [:user_id])
+    create index(:chat_seen_messages, [:message_id])
+
     create(index(:chat_seen_messages, [:user_id, :message_id]))
   end
 end

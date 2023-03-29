@@ -10,6 +10,11 @@ import Config
 config :chat,
   ecto_repos: [Chat.Repo]
 
+config :chat, :pow,
+  user: Chat.Auth.User,
+  repo: Chat.Repo,
+  web_module: ChatWeb
+
 # Configures the endpoint
 config :chat, ChatWeb.Endpoint,
   url: [host: "localhost"],
