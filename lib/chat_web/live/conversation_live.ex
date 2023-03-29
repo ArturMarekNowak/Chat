@@ -4,7 +4,7 @@ defmodule ChatWeb.ConversationLive do
   use Phoenix.LiveView, layout: {ChatWeb.LayoutView, "live.html"}
   use Phoenix.HTML
 
-  alias Chat.{Auth, Repo}
+  alias Chat.{Auth, Repo, Messenger}
   alias ChatWeb.ConversationView
 
   def render(assigns) do
@@ -20,7 +20,7 @@ defmodule ChatWeb.ConversationLive do
         %{"message" => %{"content" => content}},
         %{assigns: %{conversation_id: conversation_id, user_id: user_id, user: user}} = socket
       ) do
-    case Chat.create_message(%{
+    case Messenger.create_message(%{
            conversation_id: conversation_id,
            user_id: user_id,
            content: content
@@ -68,7 +68,7 @@ defmodule ChatWeb.ConversationLive do
     user = Auth.get_user!(user_id)
 
     conversation =
-      Chat.get_conversation!(conversation_id)
+      Messenger.get_conversation!(conversation_id)
       |> Repo.preload(messages: [:user], conversation_members: [:user])
 
     socket

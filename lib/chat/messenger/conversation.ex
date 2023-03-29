@@ -5,6 +5,8 @@ defmodule Chat.Messenger.Conversation do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias Chat.Messenger.{ConversationMember, Message}
+
   schema "chat_conversations" do
     field(:title, :string)
 

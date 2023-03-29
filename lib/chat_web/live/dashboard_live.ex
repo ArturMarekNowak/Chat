@@ -36,9 +36,13 @@ defmodule ChatWeb.DashboardLive do
         conversation_form["title"]
       end
 
+    IO.puts("----------------------------------------------")
+    IO.puts(title)
+    IO.puts("----------------------------------------------")
+
     conversation_form = Map.put(conversation_form, "title", title)
 
-    case Chat.create_conversation(conversation_form) do
+    case Messenger.create_conversation(conversation_form) do
       {:ok, _} ->
         {:noreply, socket}
 
