@@ -1,25 +1,46 @@
 defmodule ChatWeb.Router do
   use ChatWeb, :router
+  use Pow.Phoenix.Router
+  import Phoenix.LiveView.Router
 
   pipeline :browser do
     plug(:accepts, ["html"])
     plug(:fetch_session)
     plug(:fetch_live_flash)
-    plug(:put_root_layout, {ChatWeb.LayoutView, :root})
     plug(:protect_from_forgery)
     plug(:put_secure_browser_headers)
+    plug(:put_root_layout, {ChatWeb.LayoutView, :root})
   end
 
   pipeline :api do
     plug(:accepts, ["json"])
   end
 
+  pipeline :protected do
+    plug(Pow.Plug.RequireAuthenticated,
+      error_handler: Pow.Phoenix.PlugErrorHandler
+    )
+  end
+
+  scope "/" do
+    pipe_through(:browser)
+
+    pow_routes()
+  end
+
   scope "/", ChatWeb do
     pipe_through(:browser)
 
-    live("/conversations/:conversation_id/users/:user_id", ConversationLive)
-
     get("/", PageController, :index)
+  end
+
+  # Make conversation routes protected by requiring authentication
+  scope "/", ChatWeb do
+    pipe_through([:browser, :protected])
+
+    resources("/conversations", ConversationController)
+
+    live("/conversations/:conversation_id/users/:user_id", ConversationLive, as: :conversation)
   end
 
   # Other scopes may use custom stacks.

@@ -4,6 +4,8 @@ defmodule Chat.Repo.Migrations.CreateChatConversations do
   def change do
     create table(:chat_conversations) do
       add(:title, :string)
+
+      timestamps()
     end
   end
 end

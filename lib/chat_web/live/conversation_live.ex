@@ -1,16 +1,17 @@
 defmodule ChatWeb.ConversationLive do
-  use Phoenix.LiveView
+  require Logger
+
+  use Phoenix.LiveView, layout: {ChatWeb.LayoutView, "live.html"}
   use Phoenix.HTML
 
-  alias Logger
-  alias Chat.{Auth, Messenger, Repo}
+  alias Chat.{Auth, Repo, Messenger}
   alias ChatWeb.ConversationView
 
   def render(assigns) do
     ConversationView.render("show.html", assigns)
   end
 
-  def mount(assigns, socket) do
+  def mount(socket) do
     {:ok, socket}
   end
 
@@ -33,10 +34,8 @@ defmodule ChatWeb.ConversationLive do
           new_message
         )
 
-        updated_messages = socket.assigns[:messages] ++ [new_message]
-
       {:error, err} ->
-        {Logger.error(inspect(err))}
+        Logger.error(inspect(err))
     end
 
     {:noreply, socket}
@@ -52,7 +51,19 @@ defmodule ChatWeb.ConversationLive do
      |> assign_records()}
   end
 
-  # A private helper function to retrieve needed records from the DB
+  def handle_info(%{event: "new_message", payload: new_message}, socket) do
+    annotated_message =
+      if new_message.user.id != socket.assigns[:user].id do
+        new_message |> Map.put(:incoming, true)
+      else
+        new_message
+      end
+
+    updated_messages = socket.assigns[:messages] ++ [annotated_message]
+
+    {:noreply, socket |> assign(:messages, updated_messages)}
+  end
+
   defp assign_records(%{assigns: %{user_id: user_id, conversation_id: conversation_id}} = socket) do
     user = Auth.get_user!(user_id)
 
@@ -64,11 +75,5 @@ defmodule ChatWeb.ConversationLive do
     |> assign(:user, user)
     |> assign(:conversation, conversation)
     |> assign(:messages, conversation.messages)
-  end
-
-  def handle_info(%{event: "new_message", payload: new_message}, socket) do
-    updated_messages = socket.assigns[:messages] ++ [new_message]
-
-    {:noreply, socket |> assign(:messages, updated_messages)}
   end
 end
