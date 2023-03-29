@@ -2,7 +2,7 @@ defmodule ChatWeb.DashboardView do
   use ChatWeb, :view
 
   def remove_member_link(contacts, user_id, current_user_id) do
-    nickname = contacts |> Enum.find(&(&1.id == user_id)) |> Map.get(:nickname)
+    nickname = contacts |> Enum.find(&(&1.id == user_id)) |> Map.get(contacts, :nickname)
 
     link("#{nickname} #{if user_id == current_user_id, do: "(me)", else: "✖"} ",
       to: "#!",
