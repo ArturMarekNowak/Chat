@@ -6,6 +6,7 @@ config :chat, Chat.Repo,
   password: "postgres",
   hostname: "localhost",
   database: "chat_dev",
+  port: 4001,
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
