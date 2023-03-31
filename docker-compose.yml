@@ -11,7 +11,7 @@ services:
       context: .
     environment:
       # Variables to connect to our Postgres server.
-      DATABASE_URL: ecto://postgres:postgres@host.docker.internal:5432/chat_dev
+      DATABASE_URL: ecto://postgres:postgres@host.docker.internal:4001/chat_dev
       SECRET_KEY_BASE: gsMMWi0Ut/PGCkoK5rUlHWTLzawQr2n7ADvtzKZJlMZRAg1niQ0Kbqbuyfyw3InI"
       # Hostname of our Postgres container.
       PGHOST: db
@@ -30,9 +30,10 @@ services:
       POSTGRES_PASSWORD: postgres
       # Set a path where Postgres should store the data.
       PGDATA: /var/lib/postgresql/data/pgdata
+      PGPORT: 4001
     restart: always
-    expose:
-      - 5432
+    ports:
+      - "4001:4001"
     volumes:
       - pgdata:/var/lib/postgresql/data
 
