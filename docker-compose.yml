@@ -1,0 +1,40 @@
+# Version of docker-compose.
+version: "3"
+
+# Containers we're going to run.
+services:
+  phoenix:
+    build:
+      context: .
+      dockerfile: ./docker/web/Dockerfile
+    environment:
+      PGHOST: db
+    ports:
+      - "4000:4000"
+    depends_on:
+      - db
+    volumes:
+      - /app/assets/node_modules
+      - ./assets:/app/assets
+      - ./config:/app/config:ro
+      - ./lib:/app/lib:ro
+      - ./priv:/app/priv
+      - ./test:/app/test:ro
+      - ./mix.exs:/app/mix.exs:ro
+
+  db:
+    build:
+      context: .
+      dockerfile: ./docker/db/Dockerfile
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /var/lib/postgresql/data/pgdata
+    restart: always
+    ports:
+      - "4001:4001"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
