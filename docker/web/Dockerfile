@@ -83,6 +83,9 @@ RUN chown nobody /app
 
 # set runner ENV
 ENV MIX_ENV="prod"
+ENV DATABASE_URL="ecto://postgres:postgres@host.docker.internal:4001/chat_dev"
+ENV SECRET_KEY_BASE="gsMMWi0Ut/PGCkoK5rUlHWTLzawQr2n7ADvtzKZJlMZRAg1niQ0Kbqbuyfyw3InI"
+
 
 # Only copy the final release from the build stage
 COPY --from=builder --chown=nobody:root /app/_build/${MIX_ENV}/rel/chat ./
