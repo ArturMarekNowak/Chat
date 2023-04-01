@@ -13,6 +13,15 @@ services:
       - "4000:4000"
     depends_on:
       - db
+    volumes:
+      - /app/assets/node_modules
+      - ./assets:/app/assets
+      - ./config:/app/config:ro
+      - ./lib:/app/lib:ro
+      - ./priv:/app/priv
+      - ./test:/app/test:ro
+      - ./mix.exs:/app/mix.exs:ro
+
   db:
     build:
       context: .
@@ -21,10 +30,9 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       PGDATA: /var/lib/postgresql/data/pgdata
-      PORT: 5432
     restart: always
     ports:
-      - "4001:5432"
+      - "4001:4001"
     volumes:
       - pgdata:/var/lib/postgresql/data
 
