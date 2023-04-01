@@ -34,6 +34,7 @@ WORKDIR /app
 COPY config ./config
 COPY lib ./lib
 COPY priv ./priv
+COPY assets/static/images /app/priv/static/images
 
 # Compile the app
 RUN mix compile
