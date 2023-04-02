@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag chat
+        run: docker build . --file ./docker/web/Dockerfile --tag chat
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
